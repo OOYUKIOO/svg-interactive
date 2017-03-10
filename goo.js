@@ -26,16 +26,30 @@ var drawCircle = function(x,y){
     c.setAttribute("yVel",Math.floor((Math.random() < 0.5 ? -1 : 1)*Math.random()*15+1));
     console.log("draw new circle");
     c.addEventListener('click',function(e){
+	clickCircle(e,c);
+	/**
 	e.stopPropagation();
 	if (c.getAttribute("fill") == "black"){
 	    c.setAttribute("fill","grey");
 	    console.log("change color");
 	}else{
 	    svg.removeChild(c);
-	    svg.append(drawCircle(Math.floor(Math.random()*500+10),Math.floor(Math.random()*500+10)));
+	    svg.appendChild(drawCircle(Math.floor(Math.random()*500+10),Math.floor(Math.random()*500+10)));
 	};
+	**/
     });
     return c;
+};
+
+var clickCircle = function(e,c){
+    e.stopPropagation();
+    if (c.getAttribute("fill") == "black"){
+	c.setAttribute("fill","grey");
+	console.log("change color");
+    }else{
+	svg.removeChild(c);
+	svg.appendChild(drawCircle(Math.floor(Math.random()*500+10),Math.floor(Math.random()*500+10)));
+    };
 };
 
 var Clear = function() {
